@@ -17,15 +17,15 @@ print "active...."
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.bind((TCP_IP, TCP_PORT))
 s.listen(1)
-conn, addr = s.accept()
+myData, addr = s.accept()
 print 'address:{}'.format(addr)
 
 while 1:
-    data = conn.recv(BUFFER_SIZE)
+    data = myData.recv(BUFFER_SIZE)
     if not data: break
     print "received data:", data
     c = factorial(data)
-    conn.send(str(c))  # echo
+    myData.send(str(c))  # echo
     print "sent to "+str(c)
 
-conn.close()
+myData.close()
